@@ -1,4 +1,3 @@
-console.log('Starting nodes.js');
 const fs = require('fs');
 
 const fileName = 'notes-data.json';
