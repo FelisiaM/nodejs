@@ -1,6 +1,8 @@
 console.log('Starting nodes.js');
 const fs = require('fs');
 
+const fileName = 'notes-data.json';
+
 var fetchNotes = (fileName) => {
     try {
         var notesString = fs.readFileSync(fileName);
@@ -13,14 +15,13 @@ var fetchNotes = (fileName) => {
 
 var saveNotes = (fileName, notes) => {
     fs.writeFileSync(
-            fileName,
-            JSON.stringify(notes));
+        fileName,
+        JSON.stringify(notes));
 };
 
 var addNote = (title, body) => {
     console.log('Adding note', title, body);
-    var fileName = 'notes-data.json';
-    
+
     var notes = fetchNotes(fileName);
     var note = {
         title,
@@ -31,7 +32,7 @@ var addNote = (title, body) => {
 
     if (dublicateNotes.length === 0) {
         notes.push(note);
-        saveNotes(fileName,notes);
+        saveNotes(fileName, notes);
         return true;
     }
 
@@ -46,7 +47,17 @@ var getNote = (title) => {
 }
 
 var removeNote = (title) => {
-    console.log('Removing note', title);
+
+    var notes = fetchNotes(fileName);
+
+    var notesWithoutTheRequestedTitle = notes.filter(
+        (note) => { return note.title !== title })
+
+    //save
+    if (notes.length !== notesWithoutTheRequestedTitle.length) {
+        saveNotes(fileName, notesWithoutTheRequestedTitle);
+        return true;
+    }
 }
 
 module.exports = {
