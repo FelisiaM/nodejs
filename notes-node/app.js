@@ -14,7 +14,13 @@ console.log('Process: ', process.argv);
 console.log('Yargs: ', argv);
 
 if(command === 'add'){
-    notes.addNote(argv.title, argv.body);
+    var result = notes.addNote(argv.title, argv.body);
+    if(result){
+        console.log("Note added successfully");
+    }
+    else{
+        console.log("Dublicate title detected. Note not added.");        
+    }
 } else if (command === 'list'){
     notes.getAll();
 } else if (command === 'read'){

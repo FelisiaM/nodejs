@@ -1,30 +1,38 @@
 console.log('Starting nodes.js');
 const fs = require('fs');
 
+var fetchNotes = (fileName) => {
+    try {
+        var notesString = fs.readFileSync(fileName);
+        return JSON.parse(notesString);
+    } catch (e) {
+        // do nothing if there is no previous file
+        return [];
+    }
+};
+
+var saveNotes = (fileName, notes) => {
+    fs.writeFileSync(
+            fileName,
+            JSON.stringify(notes));
+};
+
 var addNote = (title, body) => {
     console.log('Adding note', title, body);
-    var notes = [];
+    var fileName = 'notes-data.json';
+    
+    var notes = fetchNotes(fileName);
     var note = {
         title,
         body
     };
-    var fileName = 'notes-data.json';
-
-    try {
-        var notesString = fs.readFileSync(fileName);
-        notes = JSON.parse(notesString);
-    } catch (e) {
-        // do nothing if there is no previous file
-    }
 
     var dublicateNotes = notes.filter((note) => { return note.title === title });
 
     if (dublicateNotes.length === 0) {
         notes.push(note);
-
-        fs.writeFileSync(
-            fileName,
-            JSON.stringify(notes));
+        saveNotes(fileName,notes);
+        return true;
     }
 
 }
