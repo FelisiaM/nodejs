@@ -22,15 +22,17 @@ if(command === 'add'){
         console.log("Dublicate title detected. Note not added.");        
     }
 } else if (command === 'list'){
-    notes.getAll();
+    var result = notes.getAll();
+    console.log(`Printing ${result.length} note(s).`)
+    result.forEach(
+        (note) => 
+        notes.logNote(note)
+  );
 } else if (command === 'read'){
     var result = notes.getNote(argv.title);
     if(result){
         console.log("Note found.");
-        console.log("--------------");
-        console.log("Title:", result.title);
-        console.log("Body:", result.body);
-        console.log("--------------");        
+        notes.logNote(result)      
     }
     else{
         console.log('Note not found.');
