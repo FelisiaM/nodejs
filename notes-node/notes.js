@@ -9,11 +9,11 @@ var getAll = () => {
 }
 
 var getNote = (title) => {
-    console.log('Reading ', title);
+    console.log('Getting note', title);
 }
 
 var removeNote = (title) => {
-    console.log('Removing', title);
+    console.log('Removing note', title);
 }
 
 module.exports =  {
