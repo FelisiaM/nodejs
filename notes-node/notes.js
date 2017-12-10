@@ -40,10 +40,20 @@ var addNote = (title, body) => {
 
 var getAll = () => {
     console.log('Getting all notes');
+
 }
 
 var getNote = (title) => {
     console.log('Getting note', title);
+
+    var notes = fetchNotes(fileName);
+
+    var requestedNote = notes.filter(
+        (note) => { return note.title === title })
+
+    if(requestedNote.length === 1){
+        return requestedNote[0];
+    }
 }
 
 var removeNote = (title) => {

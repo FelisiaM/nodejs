@@ -24,7 +24,17 @@ if(command === 'add'){
 } else if (command === 'list'){
     notes.getAll();
 } else if (command === 'read'){
-    notes.getNote(argv.title);
+    var result = notes.getNote(argv.title);
+    if(result){
+        console.log("Note found.");
+        console.log("--------------");
+        console.log("Title:", result.title);
+        console.log("Body:", result.body);
+        console.log("--------------");        
+    }
+    else{
+        console.log('Note not found.');
+    }
 } else if (command === 'remove'){
     var result = notes.removeNote(argv.title);
     if(result){
