@@ -4,5 +4,5 @@ request({
     url: 'http://maps.googleapis.com/maps/api/geocode/json?address=eh65jj',
     json: true
 }, (error, response, body) => {
-    console.log(body);
+    console.log(JSON.stringify(body, undefined, 2));    
 });
